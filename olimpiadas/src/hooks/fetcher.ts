@@ -15,10 +15,10 @@ export function useFetch<ApiResponse>(): FetchingState<T> {
   });
 
   useEffect(() => {
-    const cachedData = localStorage.getItem("olympic-data");
-    if (cachedData) {
-      setState({ data: cachedData, isLoading: false, error: null });
-    }
+    // const cachedData = localStorage.getItem("olympic-data");
+    // if (cachedData) {
+    //   setState({ data: cachedData, isLoading: false, error: null });
+    // }
     const fetchData = async () => {
       try {
         const response = await fetch(
@@ -37,7 +37,7 @@ export function useFetch<ApiResponse>(): FetchingState<T> {
           error: error.message || "Unknown error",
         });
       }
-      localStorage.setItem("olympic-data", JSON.stringify(state.data));
+      // localStorage.setItem("olympic-data", JSON.stringify(state.data));
     };
     fetchData();
   }, []); // Refetch when the URL changes
