@@ -7,23 +7,36 @@ interface FetchingState<ApiResponse> {
   error: string | null;
 }
 
-export function useFetch<ApiResponse>(): FetchingState<T> {
+export function useFetch<ApiResponse>({
+  fetchParams = {},
+
+  //game id, 'disciplines' or 'countries'
+  routeOptions = "",
+}: {
+  fetchParams?: RequestInit;
+  routeOptions?: string;
+} = {}): FetchingState<T> {
   const [state, setState] = useState<FetchingState<T>>({
     data: null,
     isLoading: true,
     error: null,
   });
 
+  let url = "https://apis.codante.io/olympic-games";
   useEffect(() => {
-    // const cachedData = localStorage.getItem("olympic-data");
-    // if (cachedData) {
-    //   setState({ data: cachedData, isLoading: false, error: null });
-    // }
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          "https://apis.codante.io/olympic-games/events"
-        );
+        switch (routeOptions) {
+          case "disciplines":
+            url = "https://apis.codante.io/olympic-games/disciplines";
+          case "countries":
+            url = "https://apis.codante.io/olympic-games/countries";
+          case routeOptions:
+            url = `https://apis.codante.io/olympic-games/events/${routeOptions}`;
+          default:
+            url = "https://apis.codante.io/olympic-games/events";
+        }
+        const response = await fetch(url, fetchParams);
         if (!response.ok) {
           throw new Error(`API request failed with status ${response.status}`);
         }
@@ -37,7 +50,6 @@ export function useFetch<ApiResponse>(): FetchingState<T> {
           error: error.message || "Unknown error",
         });
       }
-      // localStorage.setItem("olympic-data", JSON.stringify(state.data));
     };
     fetchData();
   }, []); // Refetch when the URL changes

@@ -1,78 +1,29 @@
-/**
- * Represents the response structure of an API call.
- * @template Event - The type of the data property in the response.
- */
-/**
- * Represents the response from an API.
- */
 export interface ApiResponse {
-  /**
-   * The data returned by the API.
-   */
-  data: Event[];
+  data: Event[] | Event | OlympicCountryData[] | OlympicSport[];
 
-  /**
-   * The links related to the API response.
-   */
-  links: {
-    /**
-     * The URL of the first page.
-     */
+  links?: {
     first: string;
 
-    /**
-     * The URL of the last page.
-     */
     last: string;
 
-    /**
-     * The URL of the previous page. Can be null if on the first page.
-     */
     prev: string | null;
 
-    /**
-     * The URL of the next page. Can be null if on the last page.
-     */
     next: string | null;
   };
 
-  /**
-   * The metadata related to the API response.
-   */
-  meta: {
-    /**
-     * The current page number.
-     */
+  meta?: {
     current_page: number;
 
-    /**
-     * The starting index of the data in the current page.
-     */
     from: number;
 
-    /**
-     * The last page number.
-     */
     last_page: number;
 
-    /**
-     * The path of the API endpoint.
-     */
     path: string;
 
-    /**
-     * The number of items per page.
-     */
     per_page: number;
 
-    /**
-     * The ending index of the data in the current page.
-     */
     to: number;
 
-    /**
-     * The total number of items.
-     */
     total: number;
   };
 }
@@ -103,4 +54,23 @@ interface Competitor {
   result_position: string;
   result_winnerLoserTie: string; // "W", "L", "T" (Win, Loss, Tie)
   result_mark: string; // Could be a score, time, etc.
+}
+
+interface OlympicCountryData {
+  id: string; // ISO 3166-1 alpha-3 country code
+  name: string;
+  continent: string; // ISO 3166-1 alpha-2 continent code? (Clarify)
+  flag_url: string;
+  gold_medals: number;
+  silver_medals: number;
+  bronze_medals: number;
+  total_medals: number;
+  rank: number; // Rank based on gold medals?
+  rank_total_medals: number; // Overall rank?
+}
+
+interface OlympicSport {
+  id: string; // Unique identifier (likely a standardized code) for the sport
+  name: string; // Full name of the sport
+  pictogram_url: string; // URL to the sport's pictogram image
 }
