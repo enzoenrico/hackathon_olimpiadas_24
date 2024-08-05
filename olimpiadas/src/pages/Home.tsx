@@ -1,47 +1,35 @@
-import { Button } from "../ui/components/ui/button"
-import { Card, CardTitle, CardContent, CardFooter, CardHeader } from "../ui/components/ui/card"
-import { Event } from "../types/olimpic"
 
-import { useFetch } from "../hooks/fetcher"
+import GoldMedal from "./gold_medal.png"
 
 const Home = () => {
-
-  const { data, isLoading, error } = useFetch<ApiResponse>()
-
-  const handleDataType = (data: ApiResponse): string | Error => {
-    return data.data instanceof Array ? "Array" : "Object"
-  }
-
-  if (isLoading) {
-    return <p>Loading...</p>
-  }
-
-  if (error) {
-    return <p>{error}</p>
-  }
   return (
-    <div>
-      <Button variant={"default"} > Click me </Button>
-      <p>Data type: {handleDataType(data)}</p>
-      {
-        data.data instanceof Array ? (
-          data.data.map((event: Event) => (
-            <Card key={event.id} className="aspect-square max-w-md">
-              <CardHeader>
-                <CardTitle>{event.detailed_event_name + " " + event.discipline_name}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p>{event.venue_name}</p>
-                <img src={event.discipline_pictogram} className="w-20 object-fill" />
-              </CardContent>
-              <CardFooter>
-                <Button variant={"default"}>View</Button>
-              </CardFooter>
-            </Card>
-          ))
-        ) : "No content"
-      }
-    </div >
+
+    <section className="flex flex-col items-center">
+      <div className="md:justify-center md:gap-[200px] gap-2 items-center flex md:pt-[200px] pt-3 md:flex-row flex-col">
+        <h1 className="md:text-[50px] text-[30px]">
+          JOGOS <br />
+          OLIMPICOS
+        </h1>
+        <p className="md:w-[719px] w-[200px] md:text-3xl text-xl text-center">
+          "As Olimpíadas são o maior evento esportivo do mundo, no qual países
+          dos cinco continentes se reúnem para competir em diversas modalidades.
+          Acontecem a cada quatro anos e são divididos entre as edições de verão
+          e de inverno."
+        </p>
+      </div>
+      <div className="mt-10">
+        <div className="bg-[#B43F3F] w-[400px] h-[500px] relative flex justify-center items-center rounded-lg">
+          <div className="bg-[#F7F9F2] w-[350px] h-[450px] flex flex-col items-center justify-between rounded-lg">
+            <img
+              src={GoldMedal}
+              alt="Medalha de Ouro"
+              className="w-[162px] h-[287px]"
+            />
+            <button className="bg-[#B43F3F] text-white">Resultados</button>
+          </div>
+        </div>
+      </div>
+    </section>
   )
 }
 
