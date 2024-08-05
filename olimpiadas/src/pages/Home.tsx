@@ -1,7 +1,9 @@
+
 import GoldMedal from "./gold_medal.png"
 
 const Home = () => {
   return (
+
     <section className="flex flex-col items-center">
       <div className="md:justify-center md:gap-[200px] gap-2 items-center flex md:pt-[200px] pt-3 md:flex-row flex-col">
         <h1 className="md:text-[50px] text-[30px]">
