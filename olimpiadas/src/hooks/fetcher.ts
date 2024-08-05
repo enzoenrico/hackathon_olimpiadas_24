@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ApiResponse } from "../types/olimpic";
 
 interface FetchingState<ApiResponse> {
@@ -22,21 +22,21 @@ export function useFetch<ApiResponse>({
     error: null,
   });
 
-  let url = "https://apis.codante.io/olympic-games";
+  const urlRef = useRef("https://apis.codante.io/olympic-games/events");
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         switch (routeOptions) {
           case "disciplines":
-            url = "https://apis.codante.io/olympic-games/disciplines";
+            urlRef.current =
+              "https://apis.codante.io/olympic-games/disciplines";
+            break;
           case "countries":
-            url = "https://apis.codante.io/olympic-games/countries";
-          case routeOptions:
-            url = `https://apis.codante.io/olympic-games/events/${routeOptions}`;
-          default:
-            url = "https://apis.codante.io/olympic-games/events";
+            urlRef.current = "https://apis.codante.io/olympic-games/countries";
+            break;
         }
-        const response = await fetch(url, fetchParams);
+        const response = await fetch(urlRef.current, fetchParams);
         if (!response.ok) {
           throw new Error(`API request failed with status ${response.status}`);
         }

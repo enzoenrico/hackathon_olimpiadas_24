@@ -46,7 +46,7 @@ export interface Event {
   competitors: Competitor[];
 }
 
-interface Competitor {
+export interface Competitor {
   country_id: string;
   country_flag_url: string;
   competitor_name: string;
@@ -56,7 +56,7 @@ interface Competitor {
   result_mark: string; // Could be a score, time, etc.
 }
 
-interface OlympicCountryData {
+export interface OlympicCountryData {
   id: string; // ISO 3166-1 alpha-3 country code
   name: string;
   continent: string; // ISO 3166-1 alpha-2 continent code? (Clarify)
@@ -69,7 +69,7 @@ interface OlympicCountryData {
   rank_total_medals: number; // Overall rank?
 }
 
-interface OlympicSport {
+export interface OlympicSport {
   id: string; // Unique identifier (likely a standardized code) for the sport
   name: string; // Full name of the sport
   pictogram_url: string; // URL to the sport's pictogram image

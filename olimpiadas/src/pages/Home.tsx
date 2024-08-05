@@ -1,11 +1,16 @@
 import { Button } from "../ui/components/ui/button"
-import { ApiResponse, Event } from "../types/olimpic"
+import { Card, CardTitle, CardContent, CardFooter, CardHeader } from "../ui/components/ui/card"
+import { Event } from "../types/olimpic"
 
 import { useFetch } from "../hooks/fetcher"
 
 const Home = () => {
 
   const { data, isLoading, error } = useFetch<ApiResponse>()
+
+  const handleDataType = (data: ApiResponse): string | Error => {
+    return data.data instanceof Array ? "Array" : "Object"
+  }
 
   if (isLoading) {
     return <p>Loading...</p>
@@ -14,18 +19,29 @@ const Home = () => {
   if (error) {
     return <p>{error}</p>
   }
-
   return (
-    <>
-      <Button>Call Api</Button>
-      {data ? data.data.map((event: Event) => (
-        <div key={event.id}>
-          <h1>{event.day}</h1>
-          <p>{event.detailed_event_name}</p>
-          <br />
-        </div>
-      )) : "No data"}
-    </>
+    <div>
+      <Button variant={"default"} > Click me </Button>
+      <p>Data type: {handleDataType(data)}</p>
+      {
+        data.data instanceof Array ? (
+          data.data.map((event: Event) => (
+            <Card key={event.id} className="aspect-square max-w-md">
+              <CardHeader>
+                <CardTitle>{event.detailed_event_name + " " + event.discipline_name}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p>{event.venue_name}</p>
+                <img src={event.discipline_pictogram} className="w-20 object-fill" />
+              </CardContent>
+              <CardFooter>
+                <Button variant={"default"}>View</Button>
+              </CardFooter>
+            </Card>
+          ))
+        ) : "No content"
+      }
+    </div >
   )
 }
 
