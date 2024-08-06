@@ -6,7 +6,7 @@ import NavBar from "./ui/components/BaseComponents/NavBar/navbar"
 const App = () => {
   return (
     <>
-      <div className="w-screen h-fit bg-[#F7F9F2] md:px-[200px]">
+      <div className="w-screen h-fit bg-[#F7F9F2]">
         <NavBar />
         <Home />
       </div>
