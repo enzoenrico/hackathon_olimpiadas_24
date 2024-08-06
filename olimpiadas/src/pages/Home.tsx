@@ -5,19 +5,19 @@ import BronzeMedal from "../assets/bronze_medal.png"
 const Home = () => {
   return (
     <section className="flex flex-col items-center">
-      <div className="md:justify-center md:gap-[200px] gap-2 items-center flex md:mt-[100px] md:flex-row flex-col bg-[#7FA1C3] w-full py-[100px] border-r-blue-200">
+      <div className="md:justify-center md:gap-[200px] gap-2 items-center flex md:mt-[100px] mt-[50px] md:flex-row flex-col bg-[#7a8ea1] w-full md:py-[160px] py-[50px] border-r-blue-200">
         <h1 className="md:text-[50px] text-[30px]">
           JOGOS <br />
           OLIMPICOS
         </h1>
-        <p className="md:w-[719px] w-[200px] md:text-3xl text-xl text-center">
+        <p className="md:w-[719px] w-[200px] md:text-3xl text-xl text-center texl-base">
           "As Olimpíadas são o maior evento esportivo do mundo, no qual países
           dos cinco continentes se reúnem para competir em diversas modalidades.
           Acontecem a cada quatro anos e são divididos entre as edições de verão
           e de inverno."
         </p>
       </div>
-      <div className="flex md:flex-row flex-col items-center gap-14 mt-[250px]">
+      <div className="flex md:flex-row flex-col items-center gap-14 my-[250px]">
         <div className="bg-[#B6C7AA] w-[332px] h-[390px] relative flex justify-center items-center rounded-lg">
           <div className="bg-[#F7F9F2] w-[274px] h-[324px] flex flex-col items-center justify-between rounded-lg">
             <img
