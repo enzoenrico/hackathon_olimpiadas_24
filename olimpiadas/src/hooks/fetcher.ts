@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { ApiResponse } from "../types/olimpic";
 
 interface FetchingState<T> {
@@ -52,5 +52,9 @@ export function useFetch<T>({
         fetchData();
     }, []); // Refetch when the URL changes
 
-    return state;
+    const memoizedData = useMemo(() => state.data, [state.data])
+    return {
+        ...state,
+        data: memoizedData,
+    };
 }
